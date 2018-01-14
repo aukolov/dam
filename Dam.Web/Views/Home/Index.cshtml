@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Cyprus Dams - Reservoir Storage";
+}
+
+
+<table style="width:75%">
+    <tr>
+        <th>Reservoir</th>
+        <th>Capacity, MCM</th>
+        <th>Storage, MCM</th>
+        <th>Storage, %</th>
+    </tr>        
+@foreach (var dam in Model.Dams)
+{
+    <tr>
+        <td>@dam.Name</td>
+        <td>@dam.Capacity</td>
+        <td>@dam.Storage</td>
+        <td>@dam.StoragePercentage%</td>
+    </tr>
+}
+</table>
