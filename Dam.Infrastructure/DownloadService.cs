@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Dam.Domain;
@@ -7,23 +8,33 @@ namespace Dam.Infrastructure
 {
     public class DownloadService : IDownloadService
     {
-        public string GetHtmlText()
+        public string GetText(string url)
         {
-            var httpClient = new HttpClient();
-            var task = httpClient.GetStringAsync("http://www.moa.gov.cy/moa/wdd/wdd.nsf/reservoir_en/reservoir_en");
-            task.Wait(TimeSpan.FromSeconds(60));
-            if (task.Status != TaskStatus.RanToCompletion)
+            using (var httpClient = new HttpClient())
             {
-                return null;
-            }
+                var task = httpClient.GetStringAsync(url);
+                if (!Wait(task)) return null;
 
-            var htmlText = task.Result;
-            return htmlText;
+                var htmlText = task.Result;
+                return htmlText;
+            }
         }
 
-        public void DownloadFile(string url, string destination)
+        public byte[] DownloadBytes(string url)
         {
-            
+            using (var httpClient = new HttpClient())
+            {
+                var task = httpClient.GetByteArrayAsync(url);
+                if (!Wait(task)) return null;
+
+                return task.Result;
+            }
+        }
+
+        private static bool Wait(Task task)
+        {
+            task.Wait(TimeSpan.FromSeconds(60));
+            return task.Status == TaskStatus.RanToCompletion;
         }
     }
 }

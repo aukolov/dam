@@ -21,11 +21,11 @@ namespace Dam.UnitTests.Domain
         [Test]
         public void DownloadsDamFile()
         {
-            var filePath = _downloader.Download();
+            var result = _downloader.TryDownload();
 
-            filePath.ShouldNotBeNull();
-            File.Exists(filePath).ShouldBeTrue();
-            Path.GetExtension(filePath).ShouldBe(".xls");
+            result.ShouldNotBeNull();
+            result.Length.ShouldBeGreaterThan(50000);
+            result.Length.ShouldBeLessThan(100000);
         }
     }
 }

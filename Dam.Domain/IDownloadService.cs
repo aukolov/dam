@@ -2,7 +2,7 @@
 {
     public interface IDownloadService
     {
-        string GetHtmlText();
-        void DownloadFile(string url, string destination);
+        string GetText(string url);
+        byte[] DownloadBytes(string url);
     }
 }
