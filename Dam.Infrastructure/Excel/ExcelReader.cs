@@ -3,7 +3,7 @@ using System.IO;
 using Dam.Domain;
 using ExcelDataReader;
 
-namespace Dam.Infrastructure
+namespace Dam.Infrastructure.Excel
 {
     public class ExcelReader : IExcelReader
     {

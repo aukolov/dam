@@ -1,6 +1,5 @@
-﻿using System.IO;
-using Dam.Domain;
-using Dam.Infrastructure;
+﻿using Dam.Domain;
+using Dam.Infrastructure.Http;
 using NUnit.Framework;
 using Shouldly;
 

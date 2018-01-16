@@ -7,8 +7,7 @@ namespace Dam.Domain
 {
     public class DataSetToDamSnapshotTranslator
     {
-        private readonly int[] _rowsWithDams = new int[]
-        {
+        private readonly int[] _rowsWithDams = {
             16, 17, 18, 19, 20, 21, 22, 23,
             26, 27, 28,
             31, 32, 33, 34,
@@ -22,7 +21,7 @@ namespace Dam.Domain
         private const int CapacityColumnIndex = 4;
         private const int StorageColumnIndex = 7;
 
-        public DamSnapshotData Translate(DataSet dataSet)
+        public DamSnapshot[] Translate(DataSet dataSet)
         {
             if (dataSet.Tables.Count != 1)
             {
@@ -37,14 +36,14 @@ namespace Dam.Domain
 
             var date = ParseDate(table);
 
-            var dams = new List<DamData>();
+            var dams = new List<DamSnapshot>();
             foreach (var rowIndex in _rowsWithDams)
             {
-                var damData = ParseDam(table.Rows[rowIndex]);
-                dams.Add(damData);
+                var snapshot = ParseDam(table.Rows[rowIndex], date);
+                dams.Add(snapshot);
             }
 
-            return new DamSnapshotData(date, dams.ToArray());
+            return dams.ToArray();
         }
 
         private static DateTime ParseDate(DataTable table)
@@ -65,7 +64,7 @@ namespace Dam.Domain
             return actualDate;
         }
 
-        private static DamData ParseDam(DataRow row)
+        private static DamSnapshot ParseDam(DataRow row, DateTime date)
         {
             if (row.ItemArray.Length <= new[] { NameColumnIndex, CapacityColumnIndex, StorageColumnIndex }.Max())
             {
@@ -91,10 +90,9 @@ namespace Dam.Domain
                 throw new Exception("Invalid storage.");
             }
 
-            var damData = new DamData(name,
-                (decimal)capacity,
-                (decimal)storage);
-            return damData;
+            var damData = new DamEntity(name,
+                (decimal)capacity);
+            return new DamSnapshot(damData, date, (decimal)storage);
         }
     }
 }

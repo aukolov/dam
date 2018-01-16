@@ -7,14 +7,14 @@ namespace Dam.Web.Models
     {
         public HomeViewModel()
         {
-            Dams = new List<DamData>
+            Dams = new List<DamEntity>
             {
-                new DamData("Kouris", 115.000m, 9.194m),
-                new DamData("Kalavasos", 17.100m, 7.05m),
-                new DamData("Lefkara", 13.850m, 1.497m)
+                new DamEntity("Kouris", 115.000m),
+                new DamEntity("Kalavasos", 17.100m),
+                new DamEntity("Lefkara", 13.850m)
             };
         }
 
-        public List<DamData> Dams { get; }
+        public List<DamEntity> Dams { get; }
     }
 }

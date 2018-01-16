@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using Dam.Infrastructure;
+using Dam.Infrastructure.Excel;
 using NUnit.Framework;
 using Shouldly;
 

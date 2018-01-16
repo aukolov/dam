@@ -1,10 +1,9 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Dam.Domain;
 
-namespace Dam.Infrastructure
+namespace Dam.Infrastructure.Http
 {
     public class DownloadService : IDownloadService
     {
