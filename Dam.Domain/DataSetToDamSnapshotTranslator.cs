@@ -90,9 +90,17 @@ namespace Dam.Domain
                 throw new Exception("Invalid storage.");
             }
 
-            var damData = new DamEntity(name,
-                (decimal)capacity);
-            return new DamSnapshot(damData, date, (decimal)storage);
+            var damData = new DamEntity
+            {
+                Name = name,
+                Capacity = (decimal) capacity
+            };
+            return new DamSnapshot
+            {
+                Dam = damData,
+                Date = date,
+                Storage = (decimal)storage
+            };
         }
     }
 }

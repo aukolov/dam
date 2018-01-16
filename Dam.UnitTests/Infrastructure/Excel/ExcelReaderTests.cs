@@ -4,7 +4,7 @@ using Dam.Infrastructure.Excel;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Dam.UnitTests.Infrastructure
+namespace Dam.UnitTests.Infrastructure.Excel
 {
     [TestFixture]
     public class ExcelReaderTests
@@ -34,17 +34,17 @@ namespace Dam.UnitTests.Infrastructure
             var dataSet = _excelReader.Read(bytes);
 
             // Assert
-            dataSet.Tables.Count.ShouldBe(1);
+            ShouldBeTestExtensions.ShouldBe(dataSet.Tables.Count, 1);
             var table = dataSet.Tables[0];
 
-            table.Rows[16][1].ShouldBe("Kouris");
-            table.Rows[16][4].ShouldBe(115.0);
-            table.Rows[16][7].ShouldBe(9.2);
-            table.Rows[19][1].ShouldBe("Dipotamos");
-            table.Rows[19][4].ShouldBe(15.5);
-            table.Rows[19][7].ShouldBe(2.566);
+            ShouldBeTestExtensions.ShouldBe<object>(table.Rows[16][1], "Kouris");
+            ShouldBeTestExtensions.ShouldBe<object>(table.Rows[16][4], 115.0);
+            ShouldBeTestExtensions.ShouldBe<object>(table.Rows[16][7], 9.2);
+            ShouldBeTestExtensions.ShouldBe<object>(table.Rows[19][1], "Dipotamos");
+            ShouldBeTestExtensions.ShouldBe<object>(table.Rows[19][4], 15.5);
+            ShouldBeTestExtensions.ShouldBe<object>(table.Rows[19][7], 2.566);
 
-            table.Rows[9][11].ShouldBe(new DateTime(2018, 1, 15));
+            ShouldBeTestExtensions.ShouldBe<object>(table.Rows[9][11], new DateTime(2018, 1, 15));
         }
     }
 }

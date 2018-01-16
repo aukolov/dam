@@ -6,7 +6,7 @@ using Dam.Infrastructure.Excel;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Dam.UnitTests.Infrastructure
+namespace Dam.UnitTests.Domain
 {
     [TestFixture]
     public class DataSetToDamSnapshotTranslatorTests
@@ -39,7 +39,7 @@ namespace Dam.UnitTests.Infrastructure
             var snapshots = _translator.Translate(dataSet);
 
             // Assert
-            snapshots.Select(data => data.DateTime).ShouldAllBe(time => time == new DateTime(2018, 1, 15));
+            snapshots.Select(data => data.Date).ShouldAllBe(time => time == new DateTime(2018, 1, 15));
 
             snapshots.Length.ShouldBe(18);
             var i = 0;
