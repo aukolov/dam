@@ -1,10 +1,11 @@
 ﻿using System.Data;
 using System.IO;
+using Dam.Domain;
 using ExcelDataReader;
 
 namespace Dam.Infrastructure
 {
-    public class ExcelReader
+    public class ExcelReader : IExcelReader
     {
         static ExcelReader()
         {

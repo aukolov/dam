@@ -4,27 +4,20 @@ namespace Dam.Domain
 {
     public class DamData
     {
-        private int _storage;
-
-        public DamData(string name, int capacity)
+        public DamData(
+            string name,
+            decimal capacity,
+            decimal storage)
         {
             Name = name;
-            Capacity = capacity;
+            Capacity = Math.Round(capacity, 3);
+            Storage = Math.Round(storage, 3);
+            StoragePercentage = Math.Round(Storage / Capacity, 2);
         }
 
         public string Name { get; }
-        public int Capacity { get; }
-
-        public int Storage
-        {
-            get => _storage;
-            set
-            {
-                _storage = value;
-                StoragePercentage = (decimal)Math.Round(Storage / (double)Capacity, 2);
-            }
-        }
-
-        public decimal StoragePercentage { get; private set; }
+        public decimal Capacity { get; }
+        public decimal Storage { get; }
+        public decimal StoragePercentage { get; }
     }
 }

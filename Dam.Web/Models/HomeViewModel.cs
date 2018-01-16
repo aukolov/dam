@@ -9,18 +9,9 @@ namespace Dam.Web.Models
         {
             Dams = new List<DamData>
             {
-                new DamData("Kouris", 115000)
-                {
-                    Storage = 9194
-                },
-                new DamData("Kalavasos", 115000)
-                {
-                    Storage = 705
-                },
-                new DamData("Lefkara", 115000)
-                {
-                    Storage = 1497
-                }
+                new DamData("Kouris", 115.000m, 9.194m),
+                new DamData("Kalavasos", 17.100m, 7.05m),
+                new DamData("Lefkara", 13.850m, 1.497m)
             };
         }
 
