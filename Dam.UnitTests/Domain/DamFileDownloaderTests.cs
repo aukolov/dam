@@ -8,13 +8,13 @@ namespace Dam.UnitTests.Domain
     [TestFixture]
     public class DamFileDownloaderTests
     {
-        private DamFileDownloader _downloader;
+        private DamExcelDownloader _downloader;
 
         [SetUp]
         public void SetUp()
         {
             var downloadService = new DownloadService();
-            _downloader = new DamFileDownloader(downloadService);
+            _downloader = new DamExcelDownloader(downloadService);
         }
 
         [Test]

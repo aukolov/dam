@@ -2,7 +2,7 @@
 
 namespace Dam.Domain
 {
-    public class DamFileDownloader
+    public class DamExcelDownloader
     {
         private const string ReservoirStatusRootUrl = "http://www.moa.gov.cy/moa/wdd/wdd.nsf/reservoir_en/";
         private const string ReservoirStatusPage = "reservoir_en";
@@ -10,7 +10,7 @@ namespace Dam.Domain
         private readonly IDownloadService _downloadService;
         private readonly Regex _fileUrlRegex;
 
-        public DamFileDownloader(IDownloadService downloadService)
+        public DamExcelDownloader(IDownloadService downloadService)
         {
             _downloadService = downloadService;
             _fileUrlRegex = new Regex("id=\"HotspotRectangle\\d+\" href=\"([^\"]+)\"");
