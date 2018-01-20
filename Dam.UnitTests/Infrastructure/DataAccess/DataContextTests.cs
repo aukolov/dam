@@ -15,26 +15,15 @@ namespace Dam.UnitTests.Infrastructure.DataAccess
         [SetUp]
         public void SetUp()
         {
-            TryDeleteDatabase();
-            var databaseInitializer = new DatabaseInitializer();
-            databaseInitializer.Initialize();
-
+            DataAccessTestHelper.Initialize();
             _dataContext = new DataContext();
-        }
-
-        private static void TryDeleteDatabase()
-        {
-            if (File.Exists(DataContext.DbFilePath))
-            {
-                File.Delete(DataContext.DbFilePath);
-            }
         }
 
         [TearDown]
         public void TearDown()
         {
             _dataContext?.Dispose();
-            TryDeleteDatabase();
+            DataAccessTestHelper.TryDeleteDatabase();
         }
 
         [Test]
