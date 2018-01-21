@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore;
+﻿using Dam.Application;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
 namespace Dam.Web
@@ -7,7 +8,11 @@ namespace Dam.Web
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            using (var bootstrapper = new Bootstrapper())
+            {
+                bootstrapper.Start();
+                BuildWebHost(args).Run();
+            }
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

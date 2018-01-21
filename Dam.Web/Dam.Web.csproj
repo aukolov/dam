@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Quartz" Version="3.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dam.Application\Dam.Application.csproj" />
     <ProjectReference Include="..\Dam.Domain\Dam.Domain.csproj" />
+    <ProjectReference Include="..\Dam.Infrastructure\Dam.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,7 +5,12 @@ using System.Linq;
 
 namespace Dam.Domain
 {
-    public class DataSetToDamSnapshotTranslator
+    public interface IDataSetToDamSnapshotTranslator
+    {
+        DamSnapshot[] Translate(DataSet dataSet);
+    }
+
+    public class DataSetToDamSnapshotTranslator : IDataSetToDamSnapshotTranslator
     {
         private readonly int[] _rowsWithDams = {
             16, 17, 18, 19, 20, 21, 22, 23,
@@ -57,7 +62,7 @@ namespace Dam.Domain
             var date = dateRow[DateColumnIndex] as DateTime?;
             if (date == null)
             {
-                throw new Exception("Invalid date.");
+                throw new ArgumentException("Invalid date.");
             }
 
             var actualDate = date.Value;
@@ -77,17 +82,17 @@ namespace Dam.Domain
 
             if (name == null)
             {
-                throw new Exception("Invalid name.");
+                throw new ArgumentException("Invalid name.");
             }
 
             if (capacity == null)
             {
-                throw new Exception("Invalid capacity.");
+                throw new ArgumentException("Invalid capacity.");
             }
 
             if (storage == null)
             {
-                throw new Exception("Invalid storage.");
+                throw new ArgumentException("Invalid storage.");
             }
 
             var damData = new DamEntity
