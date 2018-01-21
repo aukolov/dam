@@ -37,7 +37,7 @@ namespace Dam.Application
                 .WithSimpleSchedule(x => x
                     .WithIntervalInMinutes(79)
                     .RepeatForever())
-                .StartNow()
+                .StartAt(new DateTimeOffset(DateTime.Now.AddMinutes(5)))
                 .Build();
 
             await _scheduler.ScheduleJob(job, trigger);

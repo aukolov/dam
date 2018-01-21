@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Dam.Domain;
+using Dam.Infrastructure.DataAccess;
+using Dam.Web.Extensions;
 
 namespace Dam.Web.Models
 {
@@ -7,9 +10,12 @@ namespace Dam.Web.Models
     {
         public HomeViewModel()
         {
-            Dams = new List<DamEntity>();
+            var damSnapshotRepository = new DamSnapshotRepository(() => new DataContext());
+            LatestSnapshots = damSnapshotRepository.Items.GroupBy(x => x.Dam)
+                .Select(x => x.MaxBy(snapshot => snapshot.Date))
+                .ToList();
         }
 
-        public List<DamEntity> Dams { get; }
+        public List<DamSnapshot> LatestSnapshots { get; }
     }
 }

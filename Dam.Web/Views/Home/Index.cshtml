@@ -10,13 +10,13 @@
         <th>Storage, MCM</th>
         <th>Storage, %</th>
     </tr>        
-@foreach (var dam in Model.Dams)
+@foreach (var snapshot in Model.LatestSnapshots)
 {
     <tr>
-        <td>@dam.Name</td>
-        <td>@dam.Capacity</td>
-        <td>@dam.Storage</td>
-        <td>@dam.StoragePercentage%</td>
+        <td>@snapshot.Dam.Name</td>
+        <td>@snapshot.Dam.Capacity</td>
+        <td>@snapshot.Storage</td>
+        <td>@(snapshot.StoragePercentage.ToString("0.00"))%</td>
     </tr>
 }
 </table>

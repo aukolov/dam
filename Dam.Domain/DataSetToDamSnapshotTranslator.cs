@@ -12,6 +12,8 @@ namespace Dam.Domain
 
     public class DataSetToDamSnapshotTranslator : IDataSetToDamSnapshotTranslator
     {
+        private readonly IDamRepository _damRepository;
+
         private readonly int[] _rowsWithDams = {
             16, 17, 18, 19, 20, 21, 22, 23,
             26, 27, 28,
@@ -23,8 +25,12 @@ namespace Dam.Domain
         private const int DateColumnIndex = 11;
 
         private const int NameColumnIndex = 1;
-        private const int CapacityColumnIndex = 4;
         private const int StorageColumnIndex = 7;
+
+        public DataSetToDamSnapshotTranslator(IDamRepository damRepository)
+        {
+            _damRepository = damRepository;
+        }
 
         public DamSnapshot[] Translate(DataSet dataSet)
         {
@@ -69,15 +75,14 @@ namespace Dam.Domain
             return actualDate;
         }
 
-        private static DamSnapshot ParseDam(DataRow row, DateTime date)
+        private DamSnapshot ParseDam(DataRow row, DateTime date)
         {
-            if (row.ItemArray.Length <= new[] { NameColumnIndex, CapacityColumnIndex, StorageColumnIndex }.Max())
+            if (row.ItemArray.Length <= new[] { NameColumnIndex, StorageColumnIndex }.Max())
             {
                 throw new ArgumentException("Not enough columns in dam row.");
             }
 
             var name = row[NameColumnIndex] as string;
-            var capacity = row[CapacityColumnIndex] as double?;
             var storage = row[StorageColumnIndex] as double?;
 
             if (name == null)
@@ -85,24 +90,20 @@ namespace Dam.Domain
                 throw new ArgumentException("Invalid name.");
             }
 
-            if (capacity == null)
-            {
-                throw new ArgumentException("Invalid capacity.");
-            }
-
             if (storage == null)
             {
                 throw new ArgumentException("Invalid storage.");
             }
 
-            var damData = new DamEntity
+            var dam = _damRepository.Items.SingleOrDefault(x => x.Name == name);
+            if (dam == null)
             {
-                Name = name,
-                Capacity = (decimal) capacity
-            };
+                throw new Exception("Dam not found.");
+            }
+
             return new DamSnapshot
             {
-                Dam = damData,
+                Dam = dam,
                 Date = date,
                 Storage = (decimal)storage
             };

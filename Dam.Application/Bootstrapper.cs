@@ -16,12 +16,15 @@ namespace Dam.Application
             var databaseInitializer = new DatabaseInitializer();
             databaseInitializer.Initialize();
 
+            var damSnapshotUpdateService = new DamSnapshotUpdateService(
+                new DamExcelDownloader(new DownloadService()),
+                new ExcelReader(),
+                new DataSetToDamSnapshotTranslator(new DamRepository(() => new DataContext())),
+                new DamSnapshotRepository(() => new DataContext()));
+            damSnapshotUpdateService.Update();
+
             _updateDamSnapshotsScheduler = new UpdateDamSnapshotsScheduler(
-                new DamSnapshotUpdateService(
-                    new DamExcelDownloader(new DownloadService()),
-                    new ExcelReader(),
-                    new DataSetToDamSnapshotTranslator(),
-                    new DamSnapshotRepository(() => new DataContext())));
+                damSnapshotUpdateService);
 
             var task = _updateDamSnapshotsScheduler.Start();
             task.Wait(TimeSpan.FromSeconds(30));
