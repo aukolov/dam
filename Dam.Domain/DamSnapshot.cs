@@ -9,6 +9,6 @@ namespace Dam.Domain
         public DateTime Date { get; set; }
         public decimal Storage { get; set; }
 
-        public decimal StoragePercentage => Storage / Dam.Capacity;
+        public decimal StoragePercentage => (Storage / Dam.Capacity) * 100;
     }
 }

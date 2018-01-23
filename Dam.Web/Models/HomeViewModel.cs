@@ -13,6 +13,7 @@ namespace Dam.Web.Models
             var damSnapshotRepository = new DamSnapshotRepository(() => new DataContext());
             LatestSnapshots = damSnapshotRepository.Items.GroupBy(x => x.Dam)
                 .Select(x => x.MaxBy(snapshot => snapshot.Date))
+                .OrderByDescending(snapshot => snapshot.Dam.Capacity)
                 .ToList();
         }
 

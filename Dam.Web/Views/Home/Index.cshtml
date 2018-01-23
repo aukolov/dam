@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Dam.Domain
+@{
     ViewData["Title"] = "Cyprus Dams - Reservoir Storage";
 }
 
@@ -6,17 +7,17 @@
 <table style="width:75%">
     <tr>
         <th>Reservoir</th>
-        <th>Capacity, MCM</th>
-        <th>Storage, MCM</th>
-        <th>Storage, %</th>
-    </tr>        
-@foreach (var snapshot in Model.LatestSnapshots)
-{
-    <tr>
-        <td>@snapshot.Dam.Name</td>
-        <td>@snapshot.Dam.Capacity</td>
-        <td>@snapshot.Storage</td>
-        <td>@(snapshot.StoragePercentage.ToString("0.00"))%</td>
+        <th class="text-right">Capacity, Mm<sup>3</sup></th>
+        <th class="text-right">Storage, Mm<sup>3</sup></th>
+        <th class="text-right">Storage, %</th>
     </tr>
-}
+    @foreach (DamSnapshot snapshot in Model.LatestSnapshots)
+    {
+        <tr>
+            <td>@snapshot.Dam.Name</td>
+            <td class="text-right">@snapshot.Dam.Capacity.ToString("0.000")</td>
+            <td class="text-right">@snapshot.Storage.ToString("0.000")</td>
+            <td class="text-right">@(snapshot.StoragePercentage.ToString("0.00"))%</td>
+        </tr>
+    }
 </table>
