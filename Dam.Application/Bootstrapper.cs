@@ -21,8 +21,6 @@ namespace Dam.Application
                 new ExcelReader(),
                 new DataSetToDamSnapshotTranslator(new DamRepository(() => new DataContext())),
                 new DamSnapshotRepository(() => new DataContext()));
-            damSnapshotUpdateService.Update();
-
             _updateDamSnapshotsScheduler = new UpdateDamSnapshotsScheduler(
                 damSnapshotUpdateService);
 
