@@ -5,3 +5,4 @@ obj/
 *.db
 src/Dam.Web/publish/
 dam.tar.gz
+src/Dam.Web/logs/
