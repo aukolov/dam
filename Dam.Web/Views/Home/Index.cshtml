@@ -7,25 +7,27 @@
 <div style="width:75%">
     <table style="width:100%">
         <tr>
-            <th>Reservoir</th>
+            <th class="left-pad">Reservoir</th>
             <th class="text-right">Capacity, Mm<sup>3</sup></th>
             <th class="text-right">Storage, Mm<sup>3</sup></th>
             <th class="text-right">Current<br />Storage, %</th>
-            <th class="text-right">Last Year<br />Storage, %</th>
+            <th class="text-right right-pad">Last Year<br />Storage, %</th>
         </tr>
         @foreach (DamRowViewModel model in Model.DamRows)
         {
             <tr>
-                <td>@(model.CurrentSnapshot.Dam.Name)</td>
+                <td class="left-pad">@(model.CurrentSnapshot.Dam.Name)</td>
                 <td class="text-right">@(model.CurrentSnapshot.Dam.Capacity.ToString("0.000"))</td>
                 <td class="text-right">@(model.CurrentSnapshot.Storage.ToString("0.000"))</td>
                 <td class="text-right">@(model.CurrentSnapshot.StoragePercentage.ToString("0.00"))%</td>
-                <td class="text-right">@(model.LastYearsSnapshot != null 
-                                             ? model.LastYearsSnapshot.StoragePercentage.ToString("0.00") + "%"
-                                             : "-")</td>
-            </tr>
-        }
+                <td class="text-right right-pad">
+                    @(model.LastYearsSnapshot != null
+                                  ? model.LastYearsSnapshot.StoragePercentage.ToString("0.00") + "%"
+                                  : "-")
+            </td>
+        </tr>
+    }
     </table>
 
-    <p align="right" style="margin-top: 10pt"><i>Last update: @Model.LastUpdate.ToString("dd/MM/yyyy")</i></p>
+    <p align="right" style="margin-top: 10px"><i>Last update: @Model.LastUpdate.ToString("dd/MM/yyyy")</i></p>
 </div>

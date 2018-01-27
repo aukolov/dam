@@ -18,3 +18,15 @@
 .text-right {
     text-align: right;
 }
+
+tbody tr:nth-child(odd) {
+    background-color: #BBDDFF;
+}
+
+.left-pad {
+    padding-left: 5px
+}
+
+.right-pad {
+    padding-right: 5px
+}
