@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Web", "Dam.Web\Dam.Web.csproj", "{C222C25A-79D4-457C-A35E-1D5B82FC4333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Web", "src\Dam.Web\Dam.Web.csproj", "{C222C25A-79D4-457C-A35E-1D5B82FC4333}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Domain", "Dam.Domain\Dam.Domain.csproj", "{235A3256-5F4E-4383-BE80-44331572E42C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Domain", "src\Dam.Domain\Dam.Domain.csproj", "{235A3256-5F4E-4383-BE80-44331572E42C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Infrastructure", "Dam.Infrastructure\Dam.Infrastructure.csproj", "{37E867C4-58D2-4990-B7B9-BE7E18E75593}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Infrastructure", "src\Dam.Infrastructure\Dam.Infrastructure.csproj", "{37E867C4-58D2-4990-B7B9-BE7E18E75593}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.UnitTests", "Dam.UnitTests\Dam.UnitTests.csproj", "{4846CA36-A351-4078-B376-6041D67226FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.UnitTests", "src\Dam.UnitTests\Dam.UnitTests.csproj", "{4846CA36-A351-4078-B376-6041D67226FF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Application", "Dam.Application\Dam.Application.csproj", "{2BB78E67-55AD-4584-833E-FE679F6A4FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Application", "src\Dam.Application\Dam.Application.csproj", "{2BB78E67-55AD-4584-833E-FE679F6A4FDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
