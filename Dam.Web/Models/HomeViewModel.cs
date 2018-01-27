@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Dam.Domain;
 using Dam.Infrastructure.DataAccess;
@@ -15,8 +16,10 @@ namespace Dam.Web.Models
                 .Select(x => x.MaxBy(snapshot => snapshot.Date))
                 .OrderByDescending(snapshot => snapshot.Dam.Capacity)
                 .ToList();
+            LastUpdate = LatestSnapshots.Max(snapshot => snapshot.Date);
         }
 
         public List<DamSnapshot> LatestSnapshots { get; }
+        public DateTime LastUpdate { get; }
     }
 }
