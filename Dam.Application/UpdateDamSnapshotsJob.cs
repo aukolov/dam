@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Dam.Domain;
 using Quartz;
 
@@ -9,12 +10,17 @@ namespace Dam.Application
     {
         public Task Execute(IJobExecutionContext context)
         {
-            var damSnapshotUpdateService = (IDamSnapshotUpdateService)context
-                .MergedJobDataMap["service"];
-            damSnapshotUpdateService.Update();
-            var taskCompletionSource = new TaskCompletionSource<object>();
-            taskCompletionSource.SetResult(null);
-            return taskCompletionSource.Task;
+            try
+            {
+                var damSnapshotUpdateService = (IDamSnapshotUpdateService)context.MergedJobDataMap["service"];
+                damSnapshotUpdateService.Update();
+            }
+            catch (Exception e)
+            {
+                Global.Logger.Exception(e, "Exception while updating snapshots.");
+            }
+
+            return Task.FromResult(0);
         }
     }
 }

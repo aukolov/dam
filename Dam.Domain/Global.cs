@@ -4,11 +4,12 @@ namespace Dam.Domain
 {
     public static class Global
     {
+        private static readonly ILogger EmptyLogger = new EmptyLogger();
         private static ILogger _logger;
 
         public static ILogger Logger
         {
-            get => _logger;
+            get => _logger ?? EmptyLogger;
             set
             {
                 if (_logger != null)

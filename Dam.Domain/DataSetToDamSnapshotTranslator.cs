@@ -5,11 +5,6 @@ using System.Linq;
 
 namespace Dam.Domain
 {
-    public interface IDataSetToDamSnapshotTranslator
-    {
-        DamSnapshot[] Translate(DataSet dataSet);
-    }
-
     public class DataSetToDamSnapshotTranslator : IDataSetToDamSnapshotTranslator
     {
         private readonly IDamRepository _damRepository;
@@ -57,6 +52,7 @@ namespace Dam.Domain
                 var lastYearsSnapshot = ParseDam(table.Rows[rowIndex], lastYearsDate, LastYearsStorageColumnIndex);
                 dams.Add(lastYearsSnapshot);
             }
+            Global.Logger.Info("Translated snapshots: {Snapshots}.", dams);
 
             return dams.ToArray();
         }

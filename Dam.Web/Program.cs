@@ -20,7 +20,7 @@ namespace Dam.Web
                 }
                 catch (Exception e)
                 {
-                    Global.Logger?.Error(e, "Error while running web server.");
+                    Global.Logger?.Exception(e, "Exception while running web server.");
                 }
                 finally
                 {
