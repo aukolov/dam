@@ -26,6 +26,7 @@ namespace Dam.Domain
 
         private const int NameColumnIndex = 1;
         private const int StorageColumnIndex = 7;
+        private const int LastYearsStorageColumnIndex = 9;
 
         public DataSetToDamSnapshotTranslator(IDamRepository damRepository)
         {
@@ -46,12 +47,15 @@ namespace Dam.Domain
             }
 
             var date = ParseDate(table);
+            var lastYearsDate = ParseDate(table).AddYears(-1);
 
             var dams = new List<DamSnapshot>();
             foreach (var rowIndex in _rowsWithDams)
             {
-                var snapshot = ParseDam(table.Rows[rowIndex], date);
-                dams.Add(snapshot);
+                var freshSnapshot = ParseDam(table.Rows[rowIndex], date, StorageColumnIndex);
+                dams.Add(freshSnapshot);
+                var lastYearsSnapshot = ParseDam(table.Rows[rowIndex], lastYearsDate, LastYearsStorageColumnIndex);
+                dams.Add(lastYearsSnapshot);
             }
 
             return dams.ToArray();
@@ -75,15 +79,15 @@ namespace Dam.Domain
             return actualDate;
         }
 
-        private DamSnapshot ParseDam(DataRow row, DateTime date)
+        private DamSnapshot ParseDam(DataRow row, DateTime date, int storageColumnIndex)
         {
-            if (row.ItemArray.Length <= new[] { NameColumnIndex, StorageColumnIndex }.Max())
+            if (row.ItemArray.Length <= new[] { NameColumnIndex, storageColumnIndex }.Max())
             {
                 throw new ArgumentException("Not enough columns in dam row.");
             }
 
             var name = row[NameColumnIndex] as string;
-            var storage = row[StorageColumnIndex] as double?;
+            var storage = row[storageColumnIndex] as double?;
 
             if (name == null)
             {
