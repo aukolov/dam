@@ -4,3 +4,4 @@ obj/
 *.user
 *.db
 src/Dam.Web/publish/
+dam.tar.gz
