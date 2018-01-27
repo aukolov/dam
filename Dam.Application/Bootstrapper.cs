@@ -4,6 +4,7 @@ using Dam.Domain;
 using Dam.Infrastructure.DataAccess;
 using Dam.Infrastructure.Excel;
 using Dam.Infrastructure.Http;
+using Dam.Infrastructure.Logging;
 
 namespace Dam.Application
 {
@@ -13,9 +14,13 @@ namespace Dam.Application
 
         public void Start()
         {
+            LogInitializer.InitializeLogger();
+
+            Global.Logger.Info("Initializing database.");
             var databaseInitializer = new DatabaseInitializer();
             databaseInitializer.Initialize();
 
+            Global.Logger.Info("Initializing snapshot update scheduler.");
             var damSnapshotUpdateService = new DamSnapshotUpdateService(
                 new DamExcelDownloader(new DownloadService()),
                 new ExcelReader(),
@@ -24,6 +29,7 @@ namespace Dam.Application
             _updateDamSnapshotsScheduler = new UpdateDamSnapshotsScheduler(
                 damSnapshotUpdateService);
 
+            Global.Logger.Info("Strating scheduler database.");
             var task = _updateDamSnapshotsScheduler.Start();
             task.Wait(TimeSpan.FromSeconds(30));
             if (task.Status != TaskStatus.RanToCompletion)

@@ -1,0 +1,3 @@
+2018-01-27 16:22:40.153 +02:00 [INF] Initializing database.
+2018-01-27 16:22:40.466 +02:00 [INF] Initializing snapshot update scheduler.
+2018-01-27 16:22:40.595 +02:00 [INF] Strating scheduler database.
