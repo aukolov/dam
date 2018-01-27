@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Infrastructure", "Dam.I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.UnitTests", "Dam.UnitTests\Dam.UnitTests.csproj", "{4846CA36-A351-4078-B376-6041D67226FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dam.Application", "Dam.Application\Dam.Application.csproj", "{2BB78E67-55AD-4584-833E-FE679F6A4FDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dam.Application", "Dam.Application\Dam.Application.csproj", "{2BB78E67-55AD-4584-833E-FE679F6A4FDB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
